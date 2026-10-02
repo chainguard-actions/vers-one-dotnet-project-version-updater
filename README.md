@@ -1,0 +1,1 @@
+# vers-one-dotnet-project-version-updater
