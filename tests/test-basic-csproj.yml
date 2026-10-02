@@ -1,0 +1,66 @@
+name: Test basic csproj version update
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Create test csproj file
+        run: |
+          mkdir -p "$GITHUB_WORKSPACE/tests/tmp"
+          cat > "$GITHUB_WORKSPACE/tests/tmp/MyProject.csproj" << 'EOF'
+          <Project Sdk="Microsoft.NET.Sdk">
+              <PropertyGroup>
+                  <Version>1.2.3</Version>
+                  <AssemblyVersion>1.2.3</AssemblyVersion>
+                  <FileVersion>1.2.3</FileVersion>
+              </PropertyGroup>
+          </Project>
+          EOF
+
+      - id: action
+        uses: .
+        with:
+          file: tests/tmp/MyProject.csproj
+          version: "2.0.0"
+
+      - name: Assert oldVersion output
+        env:
+          OLD_VERSION: ${{ steps.action.outputs.oldVersion }}
+        run: |
+          echo "oldVersion: $OLD_VERSION"
+          if [ "$OLD_VERSION" != "1.2.3" ]; then
+            echo "FAIL: expected oldVersion to be '1.2.3', got '$OLD_VERSION'"
+            exit 1
+          fi
+          echo "PASS: oldVersion is correct"
+
+      - name: Assert newVersion output
+        env:
+          NEW_VERSION: ${{ steps.action.outputs.newVersion }}
+        run: |
+          echo "newVersion: $NEW_VERSION"
+          if [ "$NEW_VERSION" != "2.0.0" ]; then
+            echo "FAIL: expected newVersion to be '2.0.0', got '$NEW_VERSION'"
+            exit 1
+          fi
+          echo "PASS: newVersion is correct"
+
+      - name: Assert file was updated
+        run: |
+          CONTENT=$(cat "$GITHUB_WORKSPACE/tests/tmp/MyProject.csproj")
+          echo "File content:"
+          echo "$CONTENT"
+          if echo "$CONTENT" | grep -q "<Version>2.0.0</Version>"; then
+            echo "PASS: Version tag updated"
+          else
+            echo "FAIL: Version tag not updated to 2.0.0"
+            exit 1
+          fi
+          if echo "$CONTENT" | grep -q "1.2.3"; then
+            echo "FAIL: Old version 1.2.3 still present in file"
+            exit 1
+          fi
+          echo "PASS: File content is correct"
