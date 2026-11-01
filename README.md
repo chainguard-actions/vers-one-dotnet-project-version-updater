@@ -6,9 +6,9 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 
 ## Versions
 
-| Version | Tag | Upstream commit |
-|---------|-----|-----------------|
-| v1.8 | [`v1.8`](https://github.com/chainguard-actions/vers-one-dotnet-project-version-updater/tree/v1.8) | [`cba3f00`](https://github.com/vers-one/dotnet-project-version-updater/commit/cba3f00eab99017c431b3817a9d71b3a489cff30) |
+| Version | Tag | Upstream commit | Hardening report |
+|---------|-----|-----------------|------------------|
+| v1.8 | [`v1.8`](https://github.com/chainguard-actions/vers-one-dotnet-project-version-updater/tree/v1.8) | [`cba3f00`](https://github.com/vers-one/dotnet-project-version-updater/commit/cba3f00eab99017c431b3817a9d71b3a489cff30) | [`HARDENING.md`](https://github.com/chainguard-actions/vers-one-dotnet-project-version-updater/blob/v1.8/HARDENING.md) |
 
 ## Privacy
 
