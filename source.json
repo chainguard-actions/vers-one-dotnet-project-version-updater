@@ -4,8 +4,13 @@
   "version": "v1.8",
   "commit_sha": "cba3f00eab99017c431b3817a9d71b3a489cff30",
   "url": "https://github.com/vers-one/dotnet-project-version-updater",
-  "policy_sha": "d636be7e43ef829af6e853da6b3c7566db9f72fe",
+  "policy_sha": "374911c4be584df24e6da57af2d990570ef0f859",
   "test_policy_sha": "843adf9e4b8f85d0c08b27b9d0b09dd094b54702",
   "test_agent_version": "2",
-  "harden_agent_version": "2"
+  "harden_agent_version": "2",
+  "dist_artifact": {
+    "gcs_uri": "gs://patch-actions-node-artifacts/dist-artifacts/vers-one/dotnet-project-version-updater/v1.8/sha256-0bd50013fcaa90d16076c39cf852d2da2411741ae73aa05c48e9e9011d9f8edc.tar.gz",
+    "sha256": "0bd50013fcaa90d16076c39cf852d2da2411741ae73aa05c48e9e9011d9f8edc",
+    "size_bytes": 598329
+  }
 }
